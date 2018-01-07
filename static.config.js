@@ -8,11 +8,6 @@ import autoprefixer from 'autoprefixer'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes'
 
-/*
-* For TypeScript Support
-* */
-const typescriptWebpackPaths = require('./webpack.config.js')
-
 const path = require('path')
 const fs = require('fs')
 
@@ -22,7 +17,7 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, 'src/themes
 
 //
 export default {
-  siteRoot: './',
+  // siteRoot: 'https://mysite.com', optional, for sitemap.xml
   getSiteProps: () => ({
     title: 'React Static',
   }),
@@ -87,40 +82,11 @@ export default {
       )
     }
   },
-  webpack: (config, { stage, defaultLoaders }) => {
-    /*
-    * TypeScript Support
-    * */
-
-    // Add .ts and .tsx extension to resolver
-    config.resolve.extensions.push('.ts', '.tsx')
-
-    // Add TypeScript Path Mappings (from tsconfig via webpack.config.js)
-    // to react-statics alias resolution
-    config.resolve.alias = typescriptWebpackPaths.resolve.alias
+  webpack: (config, { defaultLoaders, stage }) => {
 
     // Needed for momoent js resolution in React 16
     // See: https://github.com/moment/moment/issues/2979#issuecomment-332217206
-    config.resolve.alias.moment$ = 'moment/moment.js'
-
-    // We replace the existing JS rule with one, that allows us to use
-    // both TypeScript and JavaScript interchangeably
-    const jsTsLoader = {
-      test: /\.(js|jsx|ts|tsx)$/,
-      exclude: defaultLoaders.jsLoader.exclude, // as std jsLoader exclude
-      use: [
-        {
-          loader: 'babel-loader',
-        },
-        {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-          },
-        },
-      ],
-    }
-
+    // config.resolve.alias.moment$ = 'moment/moment.js'
 
     /*
     * Less Support
@@ -239,7 +205,7 @@ export default {
     config.module.rules = [
       {
         oneOf: [
-          jsTsLoader,
+          defaultLoaders.jsLoader,
           lessLoader,
           defaultLoaders.cssLoader,
           defaultLoaders.fileLoader,
