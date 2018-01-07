@@ -22,6 +22,7 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, 'src/themes
 
 //
 export default {
+  siteRoot: './',
   getSiteProps: () => ({
     title: 'React Static',
   }),

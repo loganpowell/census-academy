@@ -12,6 +12,7 @@ import 'typeface-roboto-condensed'
 import 'typeface-lora'
 
 import theme from 'themes'
+import CensusFooter from 'shows/cuts/footers/CensusFooter'
 
 injectGlobal`
   ${reset}
@@ -29,13 +30,18 @@ const Logo = styled.div`
   width: 120px;
   height: 31px;
   background: rgba(255,255,255,.2);
-  margin: 16px 28px 16px 0;
+  ${'' /* margin: 16px 28px 16px 0; */}
   float: left;
 `;
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer } = Layout;
 const MenuItemGroup = Menu.ItemGroup;
+
+const CensusHeader = styled(Header)`
+  height: auto;
+  background-color: #fff;
+`
 
 class App extends React.Component {
   state = {
@@ -58,13 +64,13 @@ class App extends React.Component {
     return (
       <Router>
         <Layout>
-         <Header className="header">
+         <CensusHeader>
            <Logo />
            <Menu
-             theme="dark"
+             theme="light"
              mode="horizontal"
-             defaultSelectedKeys={['2']}
-             style={{ lineHeight: '64px' }}
+             defaultSelectedKeys={['1']}
+             style={{ lineHeight: '2em' }}
            >
              <Menu.Item key="1">
                <Link to="/">
@@ -73,16 +79,21 @@ class App extends React.Component {
              </Menu.Item>
              <Menu.Item key="2">
                <Link to="/tutorials">
-                 <Icon type="home" />Tutorials
+                 <Icon type="fork" />Tutorials
                </Link>
              </Menu.Item>
              <Menu.Item key="3">
                <Link to="/blog">
-                 <Icon type="book" />Blog
+                 <Icon type="bars" />Blog
+               </Link>
+             </Menu.Item>
+             <Menu.Item key="4">
+               <Link to="/about">
+                 <Icon type="pushpin-o" />About
                </Link>
              </Menu.Item>
            </Menu>
-         </Header>
+         </CensusHeader>
          <Content style={{ padding: '0 50px' }}>
            <Breadcrumb style={{ margin: '16px 0' }}>
              <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -93,58 +104,10 @@ class App extends React.Component {
              {/* <Routes /> */}
            </Layout>
          </Content>
-         <Footer style={{ textAlign: 'center' }}>
-           Ant Design ©2016 Created by Ant UED
+         <Footer>
+           <CensusFooter />
          </Footer>
        </Layout>
-
-
-
-      {/* <Layout>
-
-        <Sider
-          style={{backgroundColor: "#404040"}}
-          trigger={null}
-          collapsible
-          collapsed={this.state.collapsed}
-        >
-          <Logo />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Link to="/" style={{color: "inherit", textDecoration: "none"}}>
-                <Icon type="home" />
-                <span>Home</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/blog" style={{color: "inherit", textDecoration: "none"}}>
-                <Icon type="bars" />
-                <span>Blog</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Link to="/about" style={{color: "inherit", textDecoration: "none"}}>
-                <Icon type="pushpin-o" />
-                <span>About</span>
-              </Link>
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Trigger
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
-          </Header>
-          <Content style={{ margin: '32px 32px', padding: 24, background: '#fff', minHeight: 280 }}>
-            <Routes/>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            React Static — Example with ant design UI & TypeScript / LESS loaders
-          </Footer>
-        </Layout>
-      </Layout> */}
       </Router>
     );
   }
