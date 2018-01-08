@@ -154,7 +154,7 @@ export default {
               loader: 'style-loader',
               options: {
                 hmr: false,
-                sourceMap: false,
+                sourceMap: true,
               },
             },
             use: [
@@ -163,7 +163,7 @@ export default {
                 options: {
                   importLoaders: 1,
                   minimize: true,
-                  sourceMap: false,
+                  sourceMap: true,
                 },
               },
               {
@@ -189,7 +189,7 @@ export default {
               {
                 loader: 'less-loader',
                 options: {
-                  sourceMap: false,
+                  sourceMap: true,
                   modifyVars: themeVariables,
                 },
               },
