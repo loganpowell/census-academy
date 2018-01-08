@@ -17,7 +17,7 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, 'src/themes
 
 //
 export default {
-  // siteRoot: 'https://mysite.com', optional, for sitemap.xml
+  siteRoot: 'https://loganpowell.github.io/census-academy', // optional, for sitemap.xml
   getSiteProps: () => ({
     title: 'React Static',
   }),
