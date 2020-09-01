@@ -33,6 +33,6 @@
     "less-loader": "^4.0.5",
     "less-vars-to-js": "^1.2.0",
     "postcss-flexbugs-fixes": "^3.2.0",
-    "serve": "^6.4.1"
+    "serve": "^7.1.3"
   }
 }
